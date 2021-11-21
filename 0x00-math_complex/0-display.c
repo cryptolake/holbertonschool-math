@@ -2,7 +2,7 @@
 
 void display_complex_number(complex c)
 {
-	printf("%.0f", c.re);
+	printf("%g", c.re);
 
 	if (c.im == 1 || c.im == -1)
 	{
@@ -24,7 +24,7 @@ void display_complex_number(complex c)
 		else
 			printf(" + ");
 
-		printf("%.0fi", c.im);
+		printf("%gi", c.im);
 	}
 	printf("\n");
 }
