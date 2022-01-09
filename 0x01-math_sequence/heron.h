@@ -1,6 +1,5 @@
 #ifndef HERON
 #define HERON
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
