@@ -35,27 +35,34 @@ t_cell *heron(double p, double x0)
 	t_cell *un, *head;
 	double margin = 0.0000001;
 	double prev;
+	double *arr = malloc(sizeof(double));
+	long int i = 0;
 
 	un = malloc(sizeof(t_cell));
 	if (!un)
 		return (NULL);
 
 	head = un;
-
-	un->elt = x0;
-	prev = un->elt;
+	arr[i] = x0;
+	prev = arr[i];
 
 	do {
-		un->next = malloc(sizeof(t_cell));
-		if (!un->next)
+		i++;
+		arr = realloc(arr, sizeof(double) * (i + 1));
+		if (!arr)
 			return (NULL);
 
+		arr[i] = (1.0 / 2.0) * (prev + p / prev);
+		prev = arr[i];
+	} while (ABS(sqroot(p) - arr[i]) > margin);
+
+	for (; i >= 0; i--) 
+	{
+		un->next = malloc(sizeof(t_cell));
 		un = un->next;
-		un->elt = (1.0 / 2.0) * (prev + p / prev);
-		prev = un->elt;
-	} while (ABS(sqroot(p) - un->elt) > margin);
+		un->elt = arr[i];
+	}
+	un = NULL;
 
-	un->next = NULL;
-
-	return (head);
+	return (head->next);
 }
