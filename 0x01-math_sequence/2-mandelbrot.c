@@ -1,4 +1,3 @@
-#include "mandelbrot.h"
 #define MAXITER 255
 #include <stdio.h>
 #include <stdlib.h>
