@@ -58,7 +58,7 @@ int mandelbrot(complex c)
 	{
 		f = addition(multiplication(f, f), c);
 
-		if (fabs(f.re) > 2)
+		if (absf(f.re) > 2)
 			return i;
 	}
 
@@ -66,7 +66,7 @@ int mandelbrot(complex c)
 
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	FILE *fp;
 	size_t xres, yres, x, y;
@@ -74,25 +74,25 @@ int main(void)
 	double scale;
 	double ypos, xpos;
 
-	/* if (argc != 7) */
-	/* { */
-	/* 	printf("Usage: %s <xres> <yres> <scale> <xpos> <ypos> <filename>\n", argv[0]); */
-	/* 	exit(1); */
-	/* } */
+	if (argc != 7)
+	{
+		printf("Usage: %s <xres> <yres> <scale> <xpos> <ypos> <filename>\n", argv[0]);
+		exit(1);
+	}
 
-	xres = 1000;
-	yres = 1000;
+	xres = atoi(argv[1]);
+	yres = atoi(argv[2]);
 
-	scale = 4;
+	scale = atof(argv[3]);
 
-	xpos = -0.5;
-	ypos = 0;
+	xpos = atof(argv[4]);
+	ypos = atof(argv[5]);
 
-	fp = fopen("mandelbrot.pgm", "wb");
+	fp = fopen(argv[6], "wb");
 
 	/* initialize the pgm file */
 	fprintf(fp, "P2\n");
-	fprintf(fp, "%ld %ld\n", xres, yres);
+	fprintf(fp, "%d %d\n", xres, yres);
 	fprintf(fp, "255\n");
 
 	for (y = 0; y < yres; y++)
