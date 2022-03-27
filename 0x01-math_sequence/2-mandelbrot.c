@@ -49,9 +49,9 @@ int main(void)
 	fprintf(fp, "%ld %ld\n", xres, yres);
 	fprintf(fp, "255\n");
 
-	for (y = 0; y < yres; y++)
+	for (y = 1; y <= yres; y++)
 	{
-		for (x = 0; x < xres; x++)
+		for (x = 1; x <= xres; x++)
 		{
 			c = plot_pixel(x, y, xres, yres, scale);
 			fprintf(fp, "%d ", mandelbrot(c));
