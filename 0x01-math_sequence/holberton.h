@@ -13,7 +13,7 @@ typedef struct complex
 
 complex multiplication(complex c1, complex c2);
 complex addition(complex c1, complex c2);
-
+double modulus(complex c);
 
 
 #endif

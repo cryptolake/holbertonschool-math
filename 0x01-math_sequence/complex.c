@@ -1,4 +1,10 @@
 #include "holberton.h"
+#include <math.h>
+
+double modulus(complex c)
+{
+	return (sqrt(pow(c.im, 2) + pow(c.re, 2)));
+}
 
 complex addition(complex c1, complex c2)
 {
