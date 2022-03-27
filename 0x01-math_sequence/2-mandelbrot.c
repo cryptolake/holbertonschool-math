@@ -1,44 +1,13 @@
-#include "mandelbrot.h"
+#include "holberton.h"
 #define MAXITER 255
 
-
-complex addition(complex c1, complex c2)
-{
-	complex res;
-
-	res.im = c1.im + c2.im;
-	res.re = c1.re + c2.re;
-
-	return (res);
-}
-
-complex multiplication(complex c1, complex c2)
-{
-	complex ca, cb, res;
-
-	ca.re = c1.re * c2.re;
-	ca.im = c1.re * c2.im;
-
-	cb.im = c1.im * c2.re;
-	cb.re = -1 * (c1.im * c2.im);
-
-	res.re = ca.re + cb.re;
-	res.im = ca.im + cb.im;
-
-	return (res);
-}
-
-complex plot_pixel(double i, double j, double width, 
-		double height, double scale,
-		double xo, double yo)
+complex plot_pixel(double x, double y, double width,
+		double height, double scale)
 {
 	complex z;
 
-	z.re = scale * (i/width - 0.5) + xo;
-	z.im = scale * (j/height - 0.5) + yo;
-
-	/* z.re = i; */
-	/* z.im = j; */
+	z.re = (x - width/2) * scale / width;
+	z.im = (y - height/2) * scale / height;
 
 	return z;
 }
@@ -66,21 +35,12 @@ int main(void)
 	size_t xres, yres, x, y;
 	complex c;
 	double scale;
-	double ypos, xpos;
 
-	/* if (argc != 7) */
-	/* { */
-	/* 	printf("Usage: %s <xres> <yres> <scale> <xpos> <ypos> <filename>\n", argv[0]); */
-	/* 	exit(1); */
-	/* } */
 
 	xres = 1000;
 	yres = 1000;
 
 	scale = 4;
-
-	xpos = -0.5;
-	ypos = 0;
 
 	fp = fopen("mandelbrot.pgm", "wb");
 
@@ -93,7 +53,7 @@ int main(void)
 	{
 		for (x = 0; x < xres; x++)
 		{
-			c = plot_pixel(x, y, xres, yres, scale, xpos, ypos);
+			c = plot_pixel(x, y, xres, yres, scale);
 			fprintf(fp, "%d ", mandelbrot(c));
 		}
 		fprintf(fp, "\n");
